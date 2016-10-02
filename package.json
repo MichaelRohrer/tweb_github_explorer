@@ -17,7 +17,9 @@
     "grunt-cli": "~0.1.13",
     "glob": "~4.0.5",
     "async": "~0.9.0",
-    "chalk": "~0.5"
+    "chalk": "~0.5",
+    "ejs": "2.4.1",
+    "express": "4.13.3"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -40,5 +42,19 @@
 	"karma-spec-reporter": "0.0.23",
     "karma-jasmine": "~0.2.1",
     "karma-phantomjs-launcher": "~0.1.2"
-  }
+  },
+    "main": "index.js",
+    "scripts": {
+    "start": "node index.js"
+  },
+    "repository": {
+    "type": "git",
+    "url": "https://github.com/heroku/node-js-getting-started"
+  },
+    "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
 }

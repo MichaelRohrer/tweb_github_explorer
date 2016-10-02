@@ -5,10 +5,9 @@ app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/assets'));
 app.use("/assets", express.static(__dirname + '/assets'));
-
-//app.use(express.static(__dirname + '/app'));
-
 app.use("/app", express.static(__dirname + '/app'));
+app.use("/src", express.static(__dirname + '/src'));
+
 
 app.use("/app/modules", express.static(__dirname + '/app/modules'));
 
