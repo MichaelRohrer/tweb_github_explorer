@@ -1,88 +1,89 @@
 /*
-	Hyperspace by HTML5 UP
+	Solid State by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-/* Type */
+/* Basic */
 
-	h1.major:after {
-		background: #b74e91;
+	body {
+		background-color: #2e3141;
+		background-image: url("../../images/bg.jpg");
+		background-size: cover;
+		background-attachment: fixed;
+		background-position: center;
 	}
 
-/* Wrapper */
-
-	.wrapper.fullscreen {
-		min-height: 0;
-		padding-bottom: 6em;
-		padding-top: 6em;
-	}
-
-		body.is-ie .wrapper.fullscreen {
-			height: auto;
-		}
-
-/* Spotlights */
-
-	.spotlights > section {
-		padding-left: 20em;
-		position: relative;
-	}
-
-		.spotlights > section > .image {
+		body:before {
+			background: rgba(46, 49, 65, 0.8);
+			content: '';
+			display: block;
 			height: 100%;
 			left: 0;
-			position: absolute;
+			position: fixed;
 			top: 0;
-			width: 20em;
+			width: 100%;
 		}
 
-		.spotlights > section > .content {
-			width: 100%;
+		body > * {
+			position: relative;
+			z-index: 1;
 		}
 
 /* Features */
 
-	.features:after {
-		clear: both;
-		content: '';
-		display: block;
+	.features article {
+		display: inline-block;
+		width: 45%;
 	}
 
-	.features section {
-		float: left;
+/* Menu */
+
+	#menu .inner {
+		margin: 4em auto;
 	}
 
-/* Split */
+/* Wrapper */
 
-	.split:after {
-		clear: both;
-		content: '';
-		display: block;
+	#wrapper > header {
+		background: none !important;
 	}
 
-	.split > * {
-		float: left;
+	.wrapper.spotlight .inner {
+		text-align: left !important;
 	}
 
-/* Sidebar */
-
-	#sidebar nav a:after {
-		background-color: #b74e91;
+	.wrapper.spotlight .image {
+		display: inline-block;
+		margin: 0 3em 2em 0 !important;
+		vertical-align: middle;
+		width: 24%;
 	}
 
-/* Header */
-
-	#header:after {
-		clear: both;
-		content: '';
-		display: block;
+	.wrapper.spotlight .content {
+		display: inline-block;
+		vertical-align: middle;
+		width: 70%;
 	}
 
-	#header > .title {
-		float: left;
+/* Banner */
+
+	#banner {
+		background: none !important;
 	}
 
-	#header > nav {
-		float: right;
+/* Footer */
+
+	#footer {
+		background: none !important;
 	}
+
+		#footer .inner form {
+			display: inline-block;
+			width: 45%;
+		}
+
+		#footer .inner .contact {
+			display: inline-block;
+			width: 45%;
+		}
