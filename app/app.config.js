@@ -11,7 +11,7 @@
 
 
 	angular
-		.module('github-explorer')
+		.module('tweb-github-explorer')
 		.config(configure)
 		.run(runBlock);
 

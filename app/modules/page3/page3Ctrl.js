@@ -25,6 +25,8 @@
 			/*jshint validthis: true */
 			var vm = this;
 
+			vm.data = [54, 21, 9, 12];
+			vm.labels = ["apple", "Pear", "Bananas", "Kiwi"];
 		}
 
 })();

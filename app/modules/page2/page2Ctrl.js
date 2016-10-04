@@ -27,7 +27,6 @@
 
 			vm.data = [54, 21, 9];
 			vm.labels = ["apple", "Pear", "Bananas"];
-
 		}
 
 })();

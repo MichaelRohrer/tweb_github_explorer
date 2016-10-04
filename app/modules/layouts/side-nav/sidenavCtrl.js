@@ -9,7 +9,7 @@
 	* Controller of the app
 	*/
 	angular
-		.module('github-explorer')
+		.module('tweb-github-explorer')
 		.controller('SidenavCtrl', SidenavCtrl)
 		.controller('SettingsCtrl', SettingsCtrl);
 

@@ -10,7 +10,7 @@
 	*/
 
 	angular
-		.module('github-explorer')
+		.module('tweb-github-explorer')
 		.controller('HomeCtrl', Home);
 
 	Home.$inject = ['homeService'];
@@ -24,7 +24,7 @@
 	function Home(homeService) {
 		/*jshint validthis: true */
 		var vm = this;
-		vm.title = "Hello, github-explorer!";
+		vm.title = "Hello, tweb-github-explorer!";
 		vm.version = "1.0.0";
 		vm.listFeatures = homeService.getFeaturesList();
 

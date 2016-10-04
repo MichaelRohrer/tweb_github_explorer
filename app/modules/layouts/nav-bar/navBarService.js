@@ -10,7 +10,7 @@
 	 */
 
   	angular
-		.module('github-explorer')
+		.module('tweb-github-explorer')
 		.factory('MenuService', Menu);
 		// Inject your dependencies as .$inject = ['$http', 'someSevide'];
 		// function Name ($http, someSevide) {...}

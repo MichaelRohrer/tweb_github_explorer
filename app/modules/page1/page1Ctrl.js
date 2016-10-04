@@ -25,7 +25,7 @@
 			/*jshint validthis: true */
 			var vm = this;
 
-			vm.title = "Welcome to GitHub Explorer!";
+			vm.title = "Click here to see our Landing Page!";
 		}
 
 })();

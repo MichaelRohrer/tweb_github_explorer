@@ -13,7 +13,7 @@
 		var controller = null, $scope = null, $location;
 
 		beforeEach(function () {
-			module('github-explorer');
+			module('tweb-github-explorer');
 		});
 
 		beforeEach(inject(function ($controller, $rootScope, _$location_) {
