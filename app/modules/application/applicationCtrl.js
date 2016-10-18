@@ -13,23 +13,26 @@
 		.module('application')
 		.controller('ApplicationCtrl', Application);
 
-		function Application($http) {
+		function Application($scope, $http) {
 
-			var vm = this;
+			$scope.update = function(){
 
-			callRepoStatAPI($http, vm, '/MichaelRohrer', '/tweb_github_explorer');
-			getApiPunchCard($http, vm, "/google", "/fruit");
+				console.log($scope.owner, $scope.repo);
+				callRepoStatAPI($http, $scope);
+				getApiPunchCard($http, $scope);
+
+			}
 		}
 
 
-	function callRepoStatAPI($http, vm, owner, repo) {
+	function callRepoStatAPI($http, vm) {
 
 		var url = "https://api.github.com";
 		var repos = "/repos";
 		var stats = "/stats";
 		var contributors = "/contributors";
 
-		var fullurl = url + repos + owner + repo + stats + contributors;
+		var fullurl = url + repos + "/" + vm.owner + "/" + vm.repo + stats + contributors;
 
 		//Get contributors list with additions, deletions, and commit counts
 		$http.get(fullurl)
@@ -39,15 +42,14 @@
 			});
 	}
 
-	function getApiPunchCard($http, vm, owner, repo){
+	function getApiPunchCard($http, vm){
 
 		var url = "https://api.github.com";
 		var repos = "/repos";
 		var stats = "/stats";
 		var contributors = "/punch_card";
 
-		var fullurl = url + repos + owner + repo + stats + contributors;
-
+		var fullurl = url + repos + "/" + vm.owner + "/" + vm.repo + stats + contributors;
 
 		//Get contributors list with additions, deletions, and commit counts
 		$http.get(fullurl)

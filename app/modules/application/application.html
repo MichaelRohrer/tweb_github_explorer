@@ -1,3 +1,20 @@
+<form role="form">
+	<div class="form-group">
+		<label>Owner</label>
+		<input ng-model="owner" class="form-control" placeholder="Owner">
+	</div>
+	<!-- /.row -->
+
+	<div class="form-group">
+		<label>Repo</label>
+		<input ng-model="repo" class="form-control" placeholder="Repo">
+	</div>
+	<!-- /.row -->
+
+	<button ng-click="update()" type="submit" class="btn btn-primary">Submit</button>
+	<!-- /.row -->
+</form>
+
 <div class="md-padding" flex layout-sm="column">
 	<md-card>
 		<md-card-content>
@@ -6,7 +23,7 @@
 	</md-card>
 
 	<canvas id="doughnut" class="chart chart-doughnut"
-			chart-data="vm.data" chart-labels="vm.labels">
+			chart-data="data" chart-labels="labels">
 	</canvas>
 
 	<br/>
@@ -17,6 +34,6 @@
 		</md-card-content>
 	</md-card>
 	<canvas id="bar" class="chart chart-bar"
-			chart-data="vm.data1" chart-labels="vm.labels1" chart-series="vm.series1">
+			chart-data="data1" chart-labels="labels1" chart-series="series1">
 	</canvas>
 </div>
