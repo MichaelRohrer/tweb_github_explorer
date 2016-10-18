@@ -1,8 +1,8 @@
 {
-  "name": "tweb-github-explorer",
+  "name": "githubexplorer",
   "description": "Modular AngularJS with Angm-generator",
   "version": "0.0.1",
-  "author": "Angmodular",
+  "author": "Michael Rohrer &amp; Thomas Hernandez",
   "engines": {
     "node": "0.10.x",
     "npm": "1.4.x"

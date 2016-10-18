@@ -10,7 +10,7 @@
 	 * Main modules of the application.
 	 */
 
-	angular.module('tweb-github-explorer', [
+	angular.module('githubexplorer', [
 		'ngResource',
 		'ngAria',
 		 'ui.bootstrap',
@@ -22,9 +22,8 @@
 		'ngSanitize',
 		'ui.router',
 		'home',
-		'page1',
-		'page2',
-		'page3',
+		'application',
+		'statistics',
 	]);
 
 })();

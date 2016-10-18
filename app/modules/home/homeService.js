@@ -9,7 +9,7 @@
 	* Service of the app
 	*/
 
-	angular.module('tweb-github-explorer')
+	angular.module('githubexplorer')
 		.factory('homeService', homeService);
 
 	homeService.$inject = ['$http'];

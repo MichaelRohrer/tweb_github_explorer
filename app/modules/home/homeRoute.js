@@ -8,7 +8,7 @@
 	* Route of the app
 	*/
 
-angular.module('tweb-github-explorer')
+angular.module('githubexplorer')
 	.config(['$stateProvider', function ($stateProvider) {
 		$stateProvider
 			

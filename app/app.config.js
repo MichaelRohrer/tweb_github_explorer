@@ -11,7 +11,7 @@
 
 
 	angular
-		.module('tweb-github-explorer')
+		.module('githubexplorer')
 		.config(configure)
 		.run(runBlock);
 
@@ -24,10 +24,10 @@
 		// This is required for Browser Sync to work poperly
 		$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-
+		
 		$urlRouterProvider
-			.otherwise('/page1');
-
+			.otherwise('/dashboard');
+		
 	}
 
 	runBlock.$inject = ['$rootScope'];

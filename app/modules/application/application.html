@@ -1,0 +1,22 @@
+<div class="md-padding" flex layout-sm="column">
+	<md-card>
+		<md-card-content>
+			<h2 class="md-title">Number of commits per contributor:</h2>
+		</md-card-content>
+	</md-card>
+
+	<canvas id="doughnut" class="chart chart-doughnut"
+			chart-data="vm.data" chart-labels="vm.labels">
+	</canvas>
+
+	<br/>
+
+	<md-card>
+		<md-card-content>
+			<h2 class="md-title">Number of commit per day in a week:</h2>
+		</md-card-content>
+	</md-card>
+	<canvas id="bar" class="chart chart-bar"
+			chart-data="vm.data1" chart-labels="vm.labels1" chart-series="vm.series1">
+	</canvas>
+</div>

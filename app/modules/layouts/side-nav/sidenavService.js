@@ -10,7 +10,7 @@
 	 */
 
   	angular
-		.module('tweb-github-explorer')
+		.module('githubexplorer')
 		.factory('MenuService', Menu);
 		// Inject your dependencies as .$inject = ['$http', 'someSevide'];
 		// function Name ($http, someSevide) {...}
@@ -22,18 +22,13 @@
 			var menu = [
 				
 					{
-						link: 'page1',
-							name: 'Page1'
+						link: 'application',
+							name: 'Application'
 					},
 			    
 					{
-						link: 'page2',
-							name: 'Page2'
-					},
-			    
-					{
-						link: 'page3',
-							name: 'Page3'
+						link: 'statistics',
+							name: 'Statistics'
 					},
 			    
 		  	];

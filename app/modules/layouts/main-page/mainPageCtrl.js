@@ -10,7 +10,7 @@
 	*/
 
 	angular
-		.module('tweb-github-explorer')
+		.module('githubexplorer')
 		.controller('LayoutCtrl', Layout);
 
 	Layout.$inject = ['$mdSidenav', '$cookies', '$state', '$mdToast', '$mdDialog'];

@@ -1,137 +1,171 @@
-<!DOCTYPE HTML>
-<!--
-	Solid State by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html lang="pt" ng-app="tweb-github-explorer">
-	<head>
-		<title>GitHub Explorer</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-	</head>
-	<body>
+<!DOCTYPE html>
+<html ng-app="githubexplorer">
 
+<head>
 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-		<!-- Page Wrapper -->
-			<div id="page-wrapper">
+    <title>SB Admin - Bootstrap Admin Template</title>
 
-				<!-- Header -->
-					<header id="header">
-						<h1><a href="index.html">GitHub Explorer</a></h1>
-						<nav>
-							<a href="#menu">Menu</a>
-						</nav>
-					</header>
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-				<!-- Menu -->
-					<nav id="menu">
-						<div class="inner">
-							<h2>Menu</h2>
-							<ul class="links">
-								<li><a ui-sref="page1">Page 1</a></li>
-								<li><a ui-sref="page2">Page 2</a></li>
-								<li><a ui-sref="page3">Page 3</a></li>
-								<li><a href="https://michaelrohrer.github.io/tweb_github_explorer/">About</a></li>
-							</ul>
-							<a href="#" class="close">Close</a>
-						</div>
-					</nav>
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
 
-				<!-- Wrapper -->
-					<section id="wrapper">
+    <!-- Morris Charts CSS -->
+    <link href="css/plugins/morris.css" rel="stylesheet">
 
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-						<header>
-							<div class="inner">
-								<h2>GitHub Explorer</h2>
-								<p>Welcome to the GitHub Explorer Project!</p>
-							</div>
-						</header>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
-						<!-- Content -->
-							<div class="wrapper">
-								<div class="inner">
+</head>
 
-									<section>
-										<!--Include sub-view with UI router-->
-										<div ui-view ></div>
-										<!--End-->
-									</section>
+<body>
 
-								</div>
-							</div>
+    <div id="wrapper">
 
-					</section>
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">GitHub Explorer</a>
+            </div>
 
-				<!-- Footer -->
-					<section id="footer">
+            <!-- Top Menu Items -->
 
-						<div class="inner">
-							<ul class="copyright">
-								<li>&copy; HEIG_VD</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-							</ul>
-						</div>
-					</section>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                	<li class="active">
+                        <a href="https://michaelrohrer.github.io/tweb_github_explorer/"><i class="fa fa-question" aria-hidden="true"></i> About</a>
+                    </li>
+                    <li class="active">
+                        <a ui-sref="application"><i class="fa fa-cog" aria-hidden="true"></i> Application</a>
+                    </li>
+                    <li>
+                        <a ui-sref="statistics"><i class="fa fa-fw fa-bar-chart-o"></i> Statistics</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
 
-			</div>
+        <div id="page-wrapper">
 
-		<!-- injector:js -->
-		<script src="/src/bower_components/jquery/dist/jquery.js"></script>
-		<script src="/src/bower_components/es5-shim/es5-shim.js"></script>
-		<script src="/src/bower_components/json3/lib/json3.min.js"></script>
-		<script src="/src/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-		<script src="/src/bower_components/angular/angular.js"></script>
-		<script src="/src/bower_components/angular-touch/angular-touch.js"></script>
-		<script src="/src/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-		<script src="/src/bower_components/angular-aria/angular-aria.js"></script>
-		<script src="/src/bower_components/angular-mocks/angular-mocks.js"></script>
-		<script src="/src/bower_components/angular-cookies/angular-cookies.js"></script>
-		<script src="/src/bower_components/angular-animate/angular-animate.js"></script>
-		<script src="/src/bower_components/angular-sanitize/angular-sanitize.js"></script>
-		<script src="/src/bower_components/angular-resource/angular-resource.js"></script>
-		<script src="/src/bower_components/angular-material-icons/angular-material-icons.min.js"></script>
-		<script src="/src/bower_components/angular-messages/angular-messages.js"></script>
-		<script src="/src/bower_components/angular-material/angular-material.js"></script>
-		<script src="/src/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-		<script src="/src/bower_components/chart.js/dist/Chart.js"></script>
-		<script src="/src/bower_components/angular-chart.js/dist/angular-chart.js"></script>
-		<script src="/app/app.js"></script>
-		<script src="/app/app.config.js"></script>
-		<script src="/app/modules/home/homeModule.js"></script>
-		<script src="/app/modules/page1/page1Module.js"></script>
-		<script src="/app/modules/page2/page2Module.js"></script>
-		<script src="/app/modules/page3/page3Module.js"></script>
-		<script src="/app/modules/home/homeRoute.js"></script>
-		<script src="/app/modules/page1/page1Route.js"></script>
-		<script src="/app/modules/page2/page2Route.js"></script>
-		<script src="/app/modules/page3/page3Route.js"></script>
-		<script src="/app/modules/home/homeCtrl.js"></script>
-		<script src="/app/modules/layouts/main-page/mainPageCtrl.js"></script>
-		<script src="/app/modules/layouts/side-nav/sidenavCtrl.js"></script>
-		<script src="/app/modules/page1/page1Ctrl.js"></script>
-		<script src="/app/modules/page2/page2Ctrl.js"></script>
-		<script src="/app/modules/page3/page3Ctrl.js"></script>
-		<script src="/app/modules/home/homeService.js"></script>
-		<script src="/app/modules/layouts/nav-bar/navBarService.js"></script>
-		<script src="/app/modules/layouts/side-nav/sidenavService.js"></script>
-		<script src="/app/modules/page1/page1Service.js"></script>
-		<script src="/app/modules/page2/page2Service.js"></script>
-		<script src="/app/modules/page3/page3Service.js"></script>
-		<!-- endinjector -->
+            <div class="container-fluid">
 
-		<!-- Scripts -->
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Application <small>Statistics Overview</small>
+                        </h1>
+                    </div>
+                </div>
+                <!-- /.row -->
 
-	</body>
+                <form role="form">
+                	<div class="form-group">
+                    	<label>Owner</label>
+                		<input class="form-control" placeholder="Owner">
+               		</div>
+                	<!-- /.row -->
+
+                	<div class="form-group">
+                    	<label>Repo</label>
+                		<input class="form-control" placeholder="Repo">
+                	</div>
+                	<!-- /.row -->
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <!-- /.row -->
+                </form>
+
+                <br/>
+
+                <!--Include sub-view with UI router-->
+                <div ui-view></div>
+                <!--End-->
+
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- injector:js -->
+    <script src="/src/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/src/bower_components/es5-shim/es5-shim.js"></script>
+    <script src="/src/bower_components/json3/lib/json3.min.js"></script>
+    <script src="/src/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/src/bower_components/angular/angular.js"></script>
+    <script src="/src/bower_components/angular-touch/angular-touch.js"></script>
+    <script src="/src/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/src/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="/src/bower_components/angular-mocks/angular-mocks.js"></script>
+    <script src="/src/bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="/src/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/src/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/src/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="/src/bower_components/angular-material-icons/angular-material-icons.min.js"></script>
+    <script src="/src/bower_components/angular-messages/angular-messages.js"></script>
+    <script src="/src/bower_components/angular-material/angular-material.js"></script>
+    <script src="/src/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/src/bower_components/chart.js/dist/Chart.js"></script>
+    <script src="/src/bower_components/angular-chart.js/dist/angular-chart.js"></script>
+    <script src="/app/app.js"></script>
+    <script src="/app/app.config.js"></script>
+    <script src="/app/modules/application/applicationModule.js"></script>
+    <script src="/app/modules/home/homeModule.js"></script>
+    <script src="/app/modules/statistics/statisticsModule.js"></script>
+    <script src="/app/modules/application/applicationRoute.js"></script>
+    <script src="/app/modules/home/homeRoute.js"></script>
+    <script src="/app/modules/statistics/statisticsRoute.js"></script>
+    <script src="/app/modules/application/applicationCtrl.js"></script>
+    <script src="/app/modules/home/homeCtrl.js"></script>
+    <script src="/app/modules/layouts/main-page/mainPageCtrl.js"></script>
+    <script src="/app/modules/layouts/side-nav/sidenavCtrl.js"></script>
+    <script src="/app/modules/statistics/statisticsCtrl.js"></script>
+    <script src="/app/modules/application/applicationService.js"></script>
+    <script src="/app/modules/home/homeService.js"></script>
+    <script src="/app/modules/layouts/nav-bar/navBarService.js"></script>
+    <script src="/app/modules/layouts/side-nav/sidenavService.js"></script>
+    <script src="/app/modules/statistics/statisticsService.js"></script>
+    <!-- endinjector -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="js/plugins/morris/raphael.min.js"></script>
+    <script src="js/plugins/morris/morris.min.js"></script>
+    <script src="js/plugins/morris/morris-data.js"></script>
+
+</body>
+
 </html>
