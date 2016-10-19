@@ -24,6 +24,7 @@
     "glob": "~4.0.5",
     "grunt-cli": "~0.1.13",
     "mongodb": "^2.2.10",
+    "promise": "^7.1.1",
     "request": "^2.75.0",
     "request-promise": "^4.1.1"
   },

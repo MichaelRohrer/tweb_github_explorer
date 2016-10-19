@@ -13,18 +13,21 @@
 		.module('statistics')
 		.controller('StatisticsCtrl', Statistics);
 
-		Statistics.$inject = [];
 
-		/*
-		* recommend
-		* Using function declarations
-		* and bindable members up top.
-		*/
-
-		function Statistics() {
+		function Statistics($scope, $http) {
 			/*jshint validthis: true */
 			var vm = this;
 
+
+			$http.get("/stats")
+				.then(function(response) {
+					//console.log(response);
+					$scope.data2 = response.data.data;
+					$scope.labels2 = response.data.labels;
+					console.log($scope.data2);
+					console.log($scope.labels2);
+
+				});
 		}
 
 })();

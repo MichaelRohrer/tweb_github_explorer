@@ -18,24 +18,30 @@
 			$scope.update = function(){
 
 				console.log($scope.owner, $scope.repo);
+
+				$http.post("/stats", { owner: $scope.owner, repo: $scope.repo });
+
 				callRepoStatAPI($http, $scope);
 				getApiPunchCard($http, $scope);
-
 			}
 		}
 
 
 	function callRepoStatAPI($http, vm) {
 
+		var token = "fbf89b6988d4aa95fdc31246f6c906235afeb762";
 		var url = "https://api.github.com";
 		var repos = "/repos";
 		var stats = "/stats";
 		var contributors = "/contributors";
+		var options = {
+			headers: {'Authorization': 'token '+token}
+		};
 
 		var fullurl = url + repos + "/" + vm.owner + "/" + vm.repo + stats + contributors;
 
 		//Get contributors list with additions, deletions, and commit counts
-		$http.get(fullurl)
+		$http.get(fullurl, options)
 			.then(function(response) {
 				vm.data = response.data;
 				formatToDisplayableData(vm);
@@ -44,15 +50,20 @@
 
 	function getApiPunchCard($http, vm){
 
+		var token = "fbf89b6988d4aa95fdc31246f6c906235afeb762";
 		var url = "https://api.github.com";
 		var repos = "/repos";
 		var stats = "/stats";
 		var contributors = "/punch_card";
+		var options = {
+			headers: {'Authorization': 'token '+token}
+		};
+
 
 		var fullurl = url + repos + "/" + vm.owner + "/" + vm.repo + stats + contributors;
 
 		//Get contributors list with additions, deletions, and commit counts
-		$http.get(fullurl)
+		$http.get(fullurl, options)
 			.then(function(response) {
 
 				vm.punchCard = response.data;

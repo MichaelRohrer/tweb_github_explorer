@@ -9,6 +9,6 @@
 	 * Module of the app
 	 */
 
-  	angular.module('statistics', []);
+  	angular.module('statistics', ['chart.js']);
 
 })();

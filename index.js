@@ -2,11 +2,16 @@
 // Server code:
 //----------------------------------------------------------------------------------------------------------------------
 
+
+//TWEB_2016
+
 var express = require('express');
 var app = express();
 
 var request = require('request-promise');
 var MongoClient = require('mongodb').MongoClient;
+
+var Promise = require('promise');
 
 var bodyParser = require('body-parser');
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
@@ -14,19 +19,8 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
 
-// assuming POST: name=foo&color=red            <-- URL encoding
-//
-// or       POST: {"name":"foo","color":"red"}  <-- JSON encoding
-
-app.post('/application', function(req, res) {
-    var owner = req.body.owner,
-        repo = req.body.repo;
-});
-
-var context = {};
-context.db_url = "mongodb://0.0.0.0:27017/github";
-
-
+var uri = "mongodb://mike10:TWEB_2016@ds061676.mlab.com:61676/heroku_90rq7346/github";
+//var uri = "mongodb://127.0.0.1:27017/github"
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -40,39 +34,74 @@ app.get('/', function(request, response) {
     response.render('index.html');
 });
 
-/*server.post('/post.html', function(request, response) {
-    context.data = request.body.p1;
+app.get('/stats', function(request, response) {
+
+    var context = {};
+    context.response = response;
+    context.db_url = uri;
+    console.log("Get Calling...");
+    openDatabaseConnection(context)
+        .then(getStats)
+        .then(closeDatabaseConnection)
+        .then(sendData);
+});
+
+app.post('/stats', function(req, res) {
+    var owner = req.body.owner,
+        repo = req.body.repo;
+    console.log(owner, repo);
+
+    var views = 1;
+    var context = {};
+    context.db_url = uri;
+    context.data = {owner: owner, repo: repo, views: views};
+
+    context.owner = owner;
+    context.repo = repo;
 
     openDatabaseConnection(context)
         .then(saveApiData)
         .then(closeDatabaseConnection);
-});*/
-
+});
 
 app.listen(app.get('port'), function() {
     console.log('Node app is running on port', app.get('port'));
 });
 
-
 //----------------------------------------------------------------------------------------------------------------------
 // Functions:
 //----------------------------------------------------------------------------------------------------------------------
 
+function sendData(context){
+    var array = {};
+    var data = new Array();
+    var labels = new Array();
 
-
-
-
-function saveApiData(context) {
-    // what do I need? An array of TV shows + a connection to MongoDB
-    // what do I promise? A confirmation that save operation has been processed
-    console.log("Saving data in MongoDB...");
-    var collection = context.db.collection("github");
-    return collection.insertMany(context.data)
-        .then(function(results) {
-            console.log("Data saved");
-            return context;
-        });
+    var i = 0;
+    while(i < context.data.length && i < 5){
+        data.push(context.data[i].views);
+        labels.push('/' + context.data[i].owner + '/' + context.data[i].repo);
+        ++i;
+    }
+    array.data = data;
+    array.labels = labels;
+    context.response.json(array);
 }
+
+function getStats(context) {
+
+    console.log("Retrieving data...");
+    var collection = context.db.collection("statistics");
+    return new Promise(function (resolve, reject) {
+        (collection.find({}).sort({ views: -1 }).toArray(function(err, res){
+            //console.log(res);
+            context.data = res;
+            console.log("Data retrieved.");
+            resolve(context);
+        }));
+    });
+}
+
 
 function openDatabaseConnection(context) {
     // what do I need? Connection options (server address, credentials)
@@ -80,77 +109,42 @@ function openDatabaseConnection(context) {
     console.log("Open DB connection...")
     return MongoClient.connect(context.db_url)
         .then(function(db) {
-            console.log("DB connection opened");
+            console.log("DB connection opened.");
             context.db = db;
             return context;
         });
 }
 
 
-function getApiContributorStat($http, vm, owner, repo) {
+function saveApiData(context) {
+    // what do I need? An array of TV shows + a connection to MongoDB
+    // what do I promise? A confirmation that save operation has been processed
+    console.log("Saving data in MongoDB...");
+    var collection = context.db.collection("statistics");
 
-    var url = "https://api.github.com";
-    var repos = "/repos";
-    var stats = "/stats";
-    var contributors = "/contributors";
-
-    var fullurl = url + repos + owner + repo + stats + contributors;
-
-    //Get contributors list with additions, deletions, and commit counts
-    $http.get(fullurl)
-        .then(function(response) {
-            vm.data = response.data;
-            formatContributorStats(vm);
+    return new Promise(function (resolve, reject) {
+        collection.find({owner: context.owner, repo: context.repo}).toArray(function(err, res){
+            if(err){
+                reject(err);
+            }
+            else{
+                if(res.length == 0) {
+                    return collection.insertOne(context.data)
+                        .then(function() {
+                            console.log("Data saved");
+                            resolve(context);
+                        });
+                }
+                else {
+                    return collection.findOneAndUpdate({owner: context.owner, repo: context.repo}, {$set: {views: res[0].views += 1}})
+                        .then(function() {
+                            console.log("Data updated");
+                            resolve(context);
+                        });
+                }
+            }
         });
-}
-
-function getApiPunchCardStats($http, vm, owner, repo){
-
-    var url = "https://api.github.com";
-    var repos = "/repos";
-    var stats = "/stats";
-    var contributors = "/punch_card";
-
-    var fullurl = url + repos + owner + repo + stats + contributors;
-
-
-    //Get contributors list with additions, deletions, and commit counts
-    $http.get(fullurl)
-        .then(function(response) {
-
-            vm.punchCard = response.data;
-            formatPunchCardStats(vm);
-        });
-}
-
-function formatPunchCardStats(vm){
-
-    vm.data1 = [0, 0, 0, 0, 0, 0, 0];
-    vm.labels1 = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    vm.series1 = ["Series A"];
-
-    var j = 0;
-    for(var i = 0; i < 7; ++i){
-        while(j < (i+1)*24){
-            vm.data1[i] += vm.punchCard[j][2];
-            j++;
-        }
-    }
-}
-
-function formatContributorStats(vm){
-
-    var obj = angular.fromJson(vm.data);
-
-    var data = [];
-    var label = [];
-
-    for(var i = 0; i < obj.length; ++i){
-        label.push(obj[i].author.login);
-        data.push(obj[i].total);
-    }
-    vm.labels = label;
-    vm.data = data;
+    });
 }
 
 function closeDatabaseConnection(context) {
@@ -163,3 +157,5 @@ function closeDatabaseConnection(context) {
             return context;
         });
 }
+
+
