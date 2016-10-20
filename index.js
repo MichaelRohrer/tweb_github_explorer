@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
 
-var uri = "mongodb://mike10:TWEB_2016@ds061676.mlab.com:61676/heroku_90rq7346";
+var uri = "mongodb://heroku_13hjrbgd:TWEB_2016@ds063186.mlab.com:63186/heroku_13hjrbgd";
 //var uri = "mongodb://127.0.0.1:27017/github"
 
 app.set('port', (process.env.PORT || 5000));
