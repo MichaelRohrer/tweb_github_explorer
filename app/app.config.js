@@ -26,7 +26,7 @@
 
 		
 		$urlRouterProvider
-			.otherwise('/dashboard');
+			.otherwise('/application');
 		
 	}
 

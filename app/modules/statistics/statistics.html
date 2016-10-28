@@ -1,11 +1,33 @@
-<div class="md-padding" flex layout-sm="column">
-    <md-card>
-        <md-card-content>
-            <h2 class="md-title">Most visited repositories</h2>
-        </md-card-content>
-    </md-card>
-
-    <canvas id="bar" class="chart chart-bar"
-            chart-data="data2" chart-labels="labels2" chart-series="series2">
-    </canvas>
+<!-- Page Heading -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Statistics <small>Application usage statistics</small>
+        </h1>
+    </div>
 </div>
+<!-- /Page Heading -->
+
+<!-- Bar-Charts -->
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="page-header">Number of commits per day in a week</h2>
+        <p class="lead">This bar-chart shows the number of commits per days in a week for a given repository. For example, you can use it to easily find which day is the most productive.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i>Five Most Visited Repositories</h3>
+            </div>
+            <div class="panel-body">
+                <canvas id="bar" class="chart chart-bar"
+                        chart-data="data2" chart-labels="labels2" chart-series="series2">
+                </canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Bar-Charts -->
