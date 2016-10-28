@@ -1,90 +1,184 @@
-<!DOCTYPE HTML>
-<!--
-	Solid State by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html lang="pt" ng-app="github-explorer">
-	<head>
-		<title>GitHub Explorer</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-	</head>
-	<body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>GitHub Explorer - Landing Page</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">GitHub Explorer</a>
+            </div>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li>
+                        <a href="index.html"><i class="fa fa-fw fa-home"></i> Home</a>
+                    </li>
+                    <li>
+                        <a href="https://gentle-coast-96649.herokuapp.com"><i class="fa fa-fw fa-cog"></i> Application</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Project presentation
+                        </h1>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <!-- Main jumbotron  -->
+                <div class="jumbotron text-center">
+                    <h1>Welcome on our beautiful landing page!</h1>
+                    <p>Just click and try it!</p>
+                    <p><a href="https://gentle-coast-96649.herokuapp.com" class="btn btn-primary btn-lg" role="button">GitHub Explorer</a>
+                    </p>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Number of commits per contributor</h3>
+                    </div>
+                    <div class="panel-body">
+                         <div class="content-section-a">
+                            <div class="container">
+                                <div class="row">
+                                    <br>
+                                    <div class="jumbotron col-lg-5 col-sm-6">
+                                        <p align="justify">This doughnut graph shows the number of commits per contributors. 
+                                            For example, you can use it to easily find who is the most productive 
+                                            contributor on any GitHub project. Each color represent a different user, 
+                                            the larger it is, the more commits a user has.</p>
+                                    </div>
+                                    <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                                        <img class="img-responsive" src="images/chart1.PNG" alt=""  width="360" height="100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Number of commits per day in a week</h3>
+                    </div>
+                    <div class="panel-body">
+                         <div class="content-section-a">
+                            <div class="container">
+                                <div class="row">
+                                    <br>
+                                    <div class="jumbotron col-lg-5 col-sm-6">
+                                        <p align="justify">This bar-chart shows the number of commits per days in a week 
+                                            for a given repository. For example, you can use it to easily find which day 
+                                            is the most productive.</p>
+                                    </div>
+                                    <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                                        <br>
+                                        <img class="img-responsive" src="images/chart3.PNG" alt="" width="600" height="300">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Five most visited repositories</h3>
+                    </div>
+                    <div class="panel-body">
+                         <div class="content-section-a">
+                            <div class="container">
+                                <div class="row">
+                                    <br>
+                                    <div class="jumbotron col-lg-5 col-sm-6">
+                                        <p align="justify">This bar-chart allow you to show which are the five most visited 
+                                            repositories on our site. In order to display this chart, the repo, his owner
+                                            and the number of times this repo was visited were stored in our database</p>
+                                    </div>
+                                        <br>
+                                        <br>
+                                    <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                                        <img class="img-responsive" src="images/chart4.PNG" alt="" width="600" height="300">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
 
-		<!-- Page Wrapper -->
-			<div id="page-wrapper">
+                
+                <!-- Footer -->
+                <footer>
+                    <div class="container text-center">
+                        <p>Copyright &copy; Rohrer Michaël, Hernandez Thomas - HEIG-VD, 2016</p>
+                    </div>
+                </footer>
 
-				<!-- Header -->
-					<header id="header">
-						<h1><a href="index.html">GitHub Explorer</a></h1>
-						<nav>
-							<a href="#menu">Menu</a>
-						</nav>
-					</header>
+            </div>
+            <!-- /.container-fluid -->
 
-				<!-- Menu -->
-					<nav id="menu">
-						<div class="inner">
-							<h2>Menu</h2>
-							<ul class="links">
-								<li><a href=https://enigmatic-plateau-75125.herokuapp.com/>Application</a></li>
-							</ul>
-							<a href="#" class="close">Close</a>
-						</div>
-					</nav>
+        </div>
+        <!-- /#page-wrapper -->
 
-				<!-- Wrapper -->
-					<section id="wrapper">
+    </div>
+    <!-- /#wrapper -->
 
-						
-						<header>
-							<div class="inner">
-								<h2>GitHub Explorer</h2>
-								<p>Welcome to the GitHub Explorer Project !</p>
-							</div>
-						</header>
-						
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
 
-						<!-- Content -->
-							<div class="wrapper">
-								<div class="inner">
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
 
-									<section>
+</body>
 
-										
-
-									</section>
-
-								</div>
-							</div>
-
-					</section>
-
-				<!-- Footer -->
-					<section id="footer">
-						<div class="inner">
-							<ul class="copyright">
-								<li>&copy; HEIG_VD</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-							</ul>
-						</div>
-					</section>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
-
-	</body>
 </html>
