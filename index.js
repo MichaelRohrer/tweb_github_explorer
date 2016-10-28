@@ -17,6 +17,12 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+//To set the port
+app.set('port', (process.env.PORT || 5000));
+
+//To define the dir-name
+app.use(express.static(__dirname + '/'));
+
 //Connection to the local database
 //var uri = "mongodb://127.0.0.1:27017/github";
 var uri = "mongodb://heroku_13hjrbgd:4edg2qi1c1rcs6g9rlnn0711c@ds063186.mlab.com:63186/heroku_13hjrbgd";
@@ -67,11 +73,7 @@ app.post('/stats', function(req, res) {
         .then(closeDatabaseConnection);
 });
 
-//To set the port
-app.set('port', (process.env.PORT || 5000));
 
-//To define the dir-name
-app.use(express.static(__dirname + '/'));
 
 //To start the server
 app.listen(app.get('port'), function() {
