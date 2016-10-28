@@ -18,6 +18,4 @@ angular.module('statistics')
 				controller: 'StatisticsCtrl',
 				controllerAs: 'vm'
 			});
-
-
 	}]);

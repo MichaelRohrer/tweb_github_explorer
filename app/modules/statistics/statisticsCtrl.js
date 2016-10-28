@@ -15,19 +15,15 @@
 
 
 		function Statistics($scope, $http) {
-			/*jshint validthis: true */
+
 			var vm = this;
 
-
+			//Fetch the stat of the five most visited repositories
 			$http.get("/stats")
 				.then(function(response) {
-					//console.log(response);
+					//Put the data into the scope to display it.
 					$scope.data2 = response.data.data;
 					$scope.labels2 = response.data.labels;
-					console.log($scope.data2);
-					console.log($scope.labels2);
-
 				});
 		}
-
 })();
