@@ -112,10 +112,15 @@ function getStats(context) {
     var collection = context.db.collection("statistics");
     return new Promise(function (resolve, reject) {
         (collection.find({}).sort({ views: -1 }).limit(5).toArray(function(err, res){
-            console.log(res);
-            context.data = res;
-            console.log("Data retrieved.");
-            resolve(context);
+            if(err){
+                reject(err);
+            }
+            else{
+                console.log(res);
+                context.data = res;
+                console.log("Data retrieved.");
+                resolve(context);
+            }
         }));
     });
 }
