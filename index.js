@@ -25,7 +25,6 @@ app.use(bodyParser.urlencoded({
 // Configuration
 //----------------------------------------------------------------------------------------------------------------------
 //Database
-//var uri = "mongodb://127.0.0.1/github";
 var uri = "mongodb://heroku_13hjrbgd:4edg2qi1c1rcs6g9rlnn0711c@ds063186.mlab.com:63186/heroku_13hjrbgd";
 //Dir-name
 app.use(express.static(__dirname + '/'));
@@ -61,22 +60,18 @@ app.get('/stats', function(request, response) {
 //Then increase a counter which counts how many time the repository has been viewed on the site.
 app.post('/stats', function(req, res) {
 
-    //Fetch the posted data
-    var owner = req.body.owner,
-        repo = req.body.repo;
-
-    //Prepare the json object to register in the database
-    var views = 1;
     var context = {};
     context.db_url = uri;
-    context.data = {owner: owner, repo: repo, views: views};
 
-    //Add the fetched data to the context
-    context.owner = owner;
-    context.repo = repo;
+    //Fetch the posted data
+    context.owner = req.body.owner;
+    context.repo = req.body.repo;
+
+    //Prepare the json object to register in the database
+    context.data = {owner: context.owner, repo: context.repo, views: 1};
 
     openDatabaseConnection(context)
-        .then(saveApiData)
+        .then(saveStatistics)
         .then(closeDatabaseConnection);
 });
 
@@ -93,14 +88,14 @@ app.listen(app.get('port'), function() {
 // Functions:
 //----------------------------------------------------------------------------------------------------------------------
 
-//Send the statistics retrieved from the database to the web page
+//Format and send the statistics retrieved from the database to the web page controller
 function sendData(context){
     var array = {};
     var data = new Array();
     var labels = new Array();
 
     var i = 0;
-    while(i < context.data.length /*&& i < 5*/){
+    while(i < context.data.length){
         data.push(context.data[i].views);
         labels.push('/' + context.data[i].owner + '/' + context.data[i].repo);
         ++i;
@@ -140,7 +135,7 @@ function openDatabaseConnection(context) {
 }
 
 //Save the data to the database
-function saveApiData(context) {
+function saveStatistics(context) {
     // what do I need? An array of TV shows + a connection to MongoDB
     // what do I promise? A confirmation that save operation has been processed or that data have been updated
     console.log("Saving data in MongoDB...");
@@ -158,7 +153,7 @@ function saveApiData(context) {
                 //The owner/repo has never been visited yet
                 if(res.length == 0) {
                     //The owner/repo is stored in the database with a number of view equals to one
-                    return collection.insertOne(context.data)
+                    return collection.insertOne({owner: context.owner, repo: context.repo, views: 1})
                         .then(function() {
                             console.log("Data saved");
                             resolve(context);
@@ -167,7 +162,7 @@ function saveApiData(context) {
                 //The owner/repo has already been visited once
                 else {
                     //The number of time the repo has been viewed is incremented
-                    return collection.findOneAndUpdate({owner: context.owner, repo: context.repo}, {$set: {views: res[0].views += 1}})
+                    return collection.findOneAndUpdate({owner: context.owner, repo: context.repo}, {$inc: {views: 1}})
                         .then(function() {
                             console.log("Data updated");
                             resolve(context);
