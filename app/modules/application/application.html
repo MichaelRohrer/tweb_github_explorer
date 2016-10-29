@@ -8,6 +8,16 @@
 </div>
 <!-- /Page Heading -->
 
+<!-- ng-if -->
+<div ng-if="success == true" class="alert alert-success">
+	<strong>Well done!</strong> Success!
+</div>
+<div ng-if="success == false" class="alert alert-danger">
+	<strong>Oh snap!</strong> The owner or the repo do probably not exist!
+</div>
+<!-- /ng-if -->
+
+
 <!-- Form -->
 <div class="row">
 	<div class="col-lg-12">

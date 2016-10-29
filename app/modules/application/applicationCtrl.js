@@ -15,16 +15,14 @@
 
 		function Application($scope, $http) {
 
-
+			//Called when the user post the form
 			$scope.update = function(){
-
-				//console.log($scope.owner, $scope.repo);
-
 				//Post the given owner/repo to the server which will store those data in a db to make stats about it
-				$http.post("/stats", { owner: $scope.owner, repo: $scope.repo });
+				//$http.post("/stats", { owner: $scope.owner, repo: $scope.repo });
+
 
 				//Fetch GitHub data and extract statistics
-				callRepoStatAPI($http, $scope);
+				getApiContributorsList($http, $scope);
 				getApiPunchCard($http, $scope);
 			}
 		}
@@ -32,7 +30,7 @@
 	//Get contributors list with additions, deletions, and commit counts.
 	//Then format the data to get the number of commit per contributor.
 	//Prepare the scope to display the data.
-	function callRepoStatAPI($http, vm) {
+	function getApiContributorsList($http, $scope) {
 
 		//Prepare the url and options to fetch the data
 		var token = "fbf89b6988d4aa95fdc31246f6c906235afeb762";
@@ -44,20 +42,30 @@
 			headers: {'Authorization': 'token '+token}
 		};
 
-		var fullurl = url + repos + "/" + vm.owner + "/" + vm.repo + stats + contributors;
+		var fullUrl = url + repos + "/" + $scope.owner + "/" + $scope.repo + stats + contributors;
 
 		//Get contributors list with additions, deletions, and commit counts
-		$http.get(fullurl, options)
-			.then(function(response) {
-				vm.data = response.data;
-				formatToDisplayableData(vm);
-			});
+		$http.get(fullUrl, options).then(function successCallback(response) {
+			// this callback will be called asynchronously
+			// when the response is available
+			$scope.success = true;
+			$scope.data = response.data;
+			$http.post("/stats", { owner: $scope.owner, repo: $scope.repo });
+			formatContributorsList($scope);
+
+		}, function errorCallback(response) {
+			// called asynchronously if an error occurs
+			// or server returns response with an error status.
+			$scope.success = false;
+			console.log("error");
+
+		});
 	}
 
 	//Get the number of commits per hour in each day
 	//Then format the data to get the number of commits per day in a week.
 	//Prepare the scope to display the data.
-	function getApiPunchCard($http, vm){
+	function getApiPunchCard($http, $scope){
 
 		//Prepare the url and options to fetch the data
 		var token = "fbf89b6988d4aa95fdc31246f6c906235afeb762";
@@ -69,30 +77,30 @@
 			headers: {'Authorization': 'token '+token}
 		};
 
-		var fullurl = url + repos + "/" + vm.owner + "/" + vm.repo + stats + contributors;
+		var fullurl = url + repos + "/" + $scope.owner + "/" + $scope.repo + stats + contributors;
 
 		//Get the number of commits per hour in each day
 		$http.get(fullurl, options)
 			.then(function(response) {
-				vm.punchCard = response.data;
-				formatPunchCard(vm);
+				$scope.punchCard = response.data;
+				formatPunchCard($scope);
 			});
 	}
 
 	//Format the data to get the number of commits per day in a week.
 	//Prepare the scope to display the data.
-	function formatPunchCard(vm){
+	function formatPunchCard($scope){
 
 		//Prepare the scope to display the data.
-		vm.data1 = [0, 0, 0, 0, 0, 0, 0];
-		vm.labels1 = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-		vm.series1 = ["Series A"];
+		$scope.data1 = [0, 0, 0, 0, 0, 0, 0];
+		$scope.labels1 = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+		$scope.series1 = ["Series A"];
 
 		//Format the data to get the number of commits per day in a week.
 		var j = 0;
 		for(var i = 0; i < 7; ++i){
 			while(j < (i+1)*24){
-				vm.data1[i] += vm.punchCard[j][2];
+				$scope.data1[i] += $scope.punchCard[j][2];
 				j++;
 			}
 		}
@@ -100,9 +108,9 @@
 
 	//Format the data to get the number of commit per contributor.
 	//Prepare the scope to display the data.
-	function formatToDisplayableData(vm){
+	function formatContributorsList($scope){
 
-		var obj = angular.fromJson(vm.data);
+		var obj = angular.fromJson($scope.data);
 
 		var data = [];
 		var label = [];
@@ -114,8 +122,8 @@
 		}
 
 		//Prepare the scope to display the data
-		vm.labels = label;
-		vm.data = data;
+		$scope.labels = label;
+		$scope.data = data;
 	}
 
 })();
