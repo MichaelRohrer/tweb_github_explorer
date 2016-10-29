@@ -1,7 +1,11 @@
 //----------------------------------------------------------------------------------------------------------------------
-// Server code:
+// Server code
+// Authors: Michael Rohrer & Thomas Hernandez
 //----------------------------------------------------------------------------------------------------------------------
 
+//----------------------------------------------------------------------------------------------------------------------
+// Required npm modules
+//----------------------------------------------------------------------------------------------------------------------
 var express = require('express');
 var app = express();
 
@@ -17,15 +21,18 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-//To set the port
-app.set('port', (process.env.PORT || 5000));
-
-//To define the dir-name
+//----------------------------------------------------------------------------------------------------------------------
+// Configuration
+//----------------------------------------------------------------------------------------------------------------------
+//Database
+var uri = "mongodb://127.0.0.1/github";
+//var uri = "mongodb://heroku_13hjrbgd:4edg2qi1c1rcs6g9rlnn0711c@ds063186.mlab.com:63186/heroku_13hjrbgd";
+//Dir-name
 app.use(express.static(__dirname + '/'));
 
-//Connection to the local database
-//var uri = "mongodb://127.0.0.1:27017/github";
-var uri = "mongodb://heroku_13hjrbgd:4edg2qi1c1rcs6g9rlnn0711c@ds063186.mlab.com:63186/heroku_13hjrbgd";
+//----------------------------------------------------------------------------------------------------------------------
+// Services
+//----------------------------------------------------------------------------------------------------------------------
 
 //GET:   /
 //Return an html page which is the index.html page
@@ -74,8 +81,10 @@ app.post('/stats', function(req, res) {
 });
 
 
-
-//To start the server
+//----------------------------------------------------------------------------------------------------------------------
+// Starting the server:
+//----------------------------------------------------------------------------------------------------------------------
+app.set('port', (process.env.PORT || 5000));
 app.listen(app.get('port'), function() {
     console.log('Node app is running on port', app.get('port'));
 });
@@ -84,15 +93,14 @@ app.listen(app.get('port'), function() {
 // Functions:
 //----------------------------------------------------------------------------------------------------------------------
 
-
-
+//Send the statistics retrieved from the database to the web page
 function sendData(context){
     var array = {};
     var data = new Array();
     var labels = new Array();
 
     var i = 0;
-    while(i < context.data.length && i < 5){
+    while(i < context.data.length /*&& i < 5*/){
         data.push(context.data[i].views);
         labels.push('/' + context.data[i].owner + '/' + context.data[i].repo);
         ++i;
@@ -102,12 +110,13 @@ function sendData(context){
     context.response.json(array);
 }
 
+//Retrieve the stats from the database
 function getStats(context) {
 
     console.log("Retrieving data...");
     var collection = context.db.collection("statistics");
     return new Promise(function (resolve, reject) {
-        (collection.find({}).sort({ views: -1 }).toArray(function(err, res){
+        (collection.find({}).sort({ views: -1 }).limit(5).toArray(function(err, res){
             //console.log(res);
             context.data = res;
             console.log("Data retrieved.");
