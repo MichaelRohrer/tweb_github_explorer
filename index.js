@@ -25,8 +25,8 @@ app.use(bodyParser.urlencoded({
 // Configuration
 //----------------------------------------------------------------------------------------------------------------------
 //Database
-var uri = "mongodb://127.0.0.1/github";
-//var uri = "mongodb://heroku_13hjrbgd:4edg2qi1c1rcs6g9rlnn0711c@ds063186.mlab.com:63186/heroku_13hjrbgd";
+//var uri = "mongodb://127.0.0.1/github";
+var uri = "mongodb://heroku_13hjrbgd:4edg2qi1c1rcs6g9rlnn0711c@ds063186.mlab.com:63186/heroku_13hjrbgd";
 //Dir-name
 app.use(express.static(__dirname + '/'));
 
@@ -117,7 +117,7 @@ function getStats(context) {
     var collection = context.db.collection("statistics");
     return new Promise(function (resolve, reject) {
         (collection.find({}).sort({ views: -1 }).limit(5).toArray(function(err, res){
-            //console.log(res);
+            console.log(res);
             context.data = res;
             console.log("Data retrieved.");
             resolve(context);
