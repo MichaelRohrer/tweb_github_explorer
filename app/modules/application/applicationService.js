@@ -15,9 +15,9 @@
 		// Inject your dependencies as .$inject = ['$http', 'someSevide'];
 		// function Name ($http, someSevide) {...}
 
-		Application.$inject = ['$http'];
+		Application.$inject = ['$http', '$scope', '$q'];
 
-		function Application ($http) {
+		function Application ($scope, $http, $q) {
 
 		}
 
