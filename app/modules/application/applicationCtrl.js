@@ -13,104 +13,80 @@
 		.module('application')
 		.controller('ApplicationCtrl', Application);
 
-		function Application($scope, $http) {
+		function Application($scope, $http, $q) {
 
 			//Called when the user post the form
 			$scope.update = function(){
-				//Post the given owner/repo to the server which will store those data in a db to make stats about it
-				//$http.post("/stats", { owner: $scope.owner, repo: $scope.repo });
-
 
 				//Fetch GitHub data and extract statistics
-				getApiContributorsList($http, $scope);
-				getApiPunchCard($http, $scope);
+				fetchApiData($scope, $http, $q);
 			}
 		}
+	
+	//Fetch GitHub data and extract statistics
+	function fetchApiData($scope, $http, $q){
 
-	//Get contributors list with additions, deletions, and commit counts.
-	//Then format the data to get the number of commit per contributor.
-	//Prepare the scope to display the data.
-	function getApiContributorsList($http, $scope) {
+		console.log("Fetching data...");
 
 		//Prepare the url and options to fetch the data
 		var token = "fbf89b6988d4aa95fdc31246f6c906235afeb762";
-		var url = "https://api.github.com";
-		var repos = "/repos";
-		var stats = "/stats";
-		var contributors = "/contributors";
 		var options = {
 			headers: {'Authorization': 'token '+token}
 		};
+		var uri = "https://api.github.com/repos" + "/" + $scope.owner + "/" + $scope.repo + "/stats";
 
-		var fullUrl = url + repos + "/" + $scope.owner + "/" + $scope.repo + stats + contributors;
+		//Async api requests
+		var first  = $http.get(uri + "/contributors", options), //Get contributors list with additions, deletions, and commit counts.
+			second = $http.get(uri + "/punch_card", options); //Get the number of commits per hour in each day
 
-		//Get contributors list with additions, deletions, and commit counts
-		$http.get(fullUrl, options).then(function successCallback(response) {
-			// this callback will be called asynchronously
-			// when the response is available
+
+		$q.all([first, second]).then(function(result) {
+
+			var tmp = [];
+			angular.forEach(result, function(response) {
+				tmp.push(response.data);
+			});
+
+			console.log("Data fetched!");
 			$scope.success = true;
-			$scope.data = response.data;
-			$http.post("/stats", { owner: $scope.owner, repo: $scope.repo });
-			formatContributorsList($scope);
+			return tmp;
 
-		}, function errorCallback(response) {
-			// called asynchronously if an error occurs
-			// or server returns response with an error status.
+		}, function (error) {
+
+			console.log("Error 404 not found !")
 			$scope.success = false;
-			console.log("error");
+			return $q.reject(error);
+
+		}).then(function(tmpResult) {
+
+			//Format the data to get the number of commit per contributor.
+			formatContributorsList($scope, tmpResult[0]);
+			//format the data to get the number of commits per day in a week.
+			formatPunchCard($scope, tmpResult[1]);
+
+		}).then(function () {
+
+			//Post the given owner/repo to the server
+			sendStatistics($http, $scope);
 
 		});
 	}
 
-	//Get the number of commits per hour in each day
-	//Then format the data to get the number of commits per day in a week.
-	//Prepare the scope to display the data.
-	function getApiPunchCard($http, $scope){
 
-		//Prepare the url and options to fetch the data
-		var token = "fbf89b6988d4aa95fdc31246f6c906235afeb762";
-		var url = "https://api.github.com";
-		var repos = "/repos";
-		var stats = "/stats";
-		var contributors = "/punch_card";
-		var options = {
-			headers: {'Authorization': 'token '+token}
-		};
-
-		var fullurl = url + repos + "/" + $scope.owner + "/" + $scope.repo + stats + contributors;
-
-		//Get the number of commits per hour in each day
-		$http.get(fullurl, options)
-			.then(function(response) {
-				$scope.punchCard = response.data;
-				formatPunchCard($scope);
+	//Post the given owner/repo to the server which will store those data in a db to make stats
+	function sendStatistics($http, $scope){
+		console.log("Sending statistics...")
+		return $http.post("/stats", { owner: $scope.owner, repo: $scope.repo })
+			.then(function () {
+				console.log("Statistics sent!");
 			});
-	}
-
-	//Format the data to get the number of commits per day in a week.
-	//Prepare the scope to display the data.
-	function formatPunchCard($scope){
-
-		//Prepare the scope to display the data.
-		$scope.data1 = [0, 0, 0, 0, 0, 0, 0];
-		$scope.labels1 = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-		$scope.series1 = ["Series A"];
-
-		//Format the data to get the number of commits per day in a week.
-		var j = 0;
-		for(var i = 0; i < 7; ++i){
-			while(j < (i+1)*24){
-				$scope.data1[i] += $scope.punchCard[j][2];
-				j++;
-			}
-		}
 	}
 
 	//Format the data to get the number of commit per contributor.
 	//Prepare the scope to display the data.
-	function formatContributorsList($scope){
+	function formatContributorsList($scope, contribList){
 
-		var obj = angular.fromJson($scope.data);
+		var obj = angular.fromJson(contribList);
 
 		var data = [];
 		var label = [];
@@ -124,6 +100,26 @@
 		//Prepare the scope to display the data
 		$scope.labels = label;
 		$scope.data = data;
+
+		console.log("Data formatted!");
 	}
 
+	//Format the data to get the number of commits per day in a week.
+	//Prepare the scope to display the data.
+	function formatPunchCard($scope, punchCard){
+
+		//Prepare the scope to display the data.
+		$scope.data1 = [0, 0, 0, 0, 0, 0, 0];
+		$scope.labels1 = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+		$scope.series1 = ["Series A"];
+
+		//Format the data to get the number of commits per day in a week.
+		var j = 0;
+		for(var i = 0; i < 7; ++i){
+			while(j < (i+1)*24){
+				$scope.data1[i] += punchCard[j][2];
+				j++;
+			}
+		}
+	}
 })();
