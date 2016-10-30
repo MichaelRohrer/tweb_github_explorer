@@ -17,11 +17,13 @@ Finaly, a third graph can be found on the web app's second page. This bar-chart 
 
 ## Landing page
 
-Our landing page can be found on the following link: [https://michaelrohrer.github.io/tweb_github_explorer/](https://michaelrohrer.github.io/tweb_github_explorer/)
+Our landing page can be found on the following link:
+- [https://michaelrohrer.github.io/tweb_github_explorer/](https://michaelrohrer.github.io/tweb_github_explorer/)
 
 ## Web application
 
-If you want to skip the landing page, the web app can be reached directly using the following link: [https://gentle-coast-96649.herokuapp.com/](https://gentle-coast-96649.herokuapp.com/)
+If you want to skip the landing page, the web app can be reached directly using the following link:
+- [https://gentle-coast-96649.herokuapp.com/](https://gentle-coast-96649.herokuapp.com/)
 
 ## Technology used
 
