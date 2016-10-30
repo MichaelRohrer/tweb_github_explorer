@@ -1,0 +1,7 @@
+/coverage
+/custom
+/docs/index.md
+
+.DS_Store
+.idea
+bower.json
