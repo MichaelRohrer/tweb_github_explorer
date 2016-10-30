@@ -40,6 +40,11 @@ If you want to skip the landing page, the web app can be reached directly using 
 - Npm
 - Grunt
 
+## Installation
+1. Clone the repo: `git clone https://github.com/MichaelRohrer/tweb_github_explorer.git`
+2. Install the dependencies: `npm install`
+3. Launch the app: `node index.js`
+
 ## Authors
 
 - Michaël Rohrer
