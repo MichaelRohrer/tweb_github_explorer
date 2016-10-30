@@ -21,7 +21,7 @@ Our landing page can be found on the following link: [https://michaelrohrer.gith
 
 ## Web application
 
-If you want to skip the landing page, the web app can be reached directly using this [link](https://gentle-coast-96649.herokuapp.com/#!/application "link")
+If you want to skip the landing page, the web app can be reached directly using this [https://gentle-coast-96649.herokuapp.com/](https://gentle-coast-96649.herokuapp.com/)
 
 ## Technology used
 
